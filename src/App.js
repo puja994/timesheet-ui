@@ -5,6 +5,8 @@ import Login from './pages/login/Login'
 import {Dashboard} from './pages/dashboard/Dashboard.page'
 import {Employee} from './pages/employee/Employee'
 import {Shifts} from './pages/shifts/Shifts'
+import Profile from "./pages/profile/Profile"
+import PasswordReset from "./pages/password-reset/PasswordReset"
 
 
 
@@ -15,7 +17,11 @@ function App() {
      <Router>
        <Switch>
 
-         <Route exact path="/dashboard">
+       <Route exact path="/">
+           <Login />
+         </Route>
+
+         <Route  path="/dashboard">
            <Dashboard />
          </Route>
 
@@ -28,9 +34,13 @@ function App() {
            <Employee />
          </Route>
 
-         <Route path="/">
-           <Login />
+         <Route path="/profile">
+           <Profile />
          </Route>
+
+         <Route exact path="/reset-password">
+						<PasswordReset />
+					</Route>
 
          <Route path="*">
 						<h1>404 Page not found</h1>

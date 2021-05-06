@@ -1,11 +1,29 @@
 import React from 'react'
 import {  Navbar, Nav} from "react-bootstrap"
+import { logOut } from "../../../pages/login/loginAction";
 import { LinkContainer } from "react-router-bootstrap"
 import '../defaultLayout.style.css'
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
-export const Header = () => {
+// export const Header = () => {
+
+  export const Header = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+  
+    const { adminProfile } = useSelector(state => state.profile);
+  
+    const handleOnLogout = () => {
+      console.log("logging out./..");
+  
+      dispatch(logOut(adminProfile?._id));
+      history.push("/");
+    }
+
+
     return (
         <Navbar collapseOnSelect bg="info" variant="dark" expand="md" className="color-nav">
 
@@ -28,7 +46,7 @@ export const Header = () => {
               <Nav.Link>EMPLOYEE</Nav.Link>
               </LinkContainer>
     
-            <Nav.Link >LOGOUT</Nav.Link>
+            <Nav.Link onClick={handleOnLogout} style={{ cursor: "pointer" }}>LOGOUT</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
