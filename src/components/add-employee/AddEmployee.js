@@ -1,27 +1,68 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Jumbotron, Form, Button, ListGroup} from 'react-bootstrap'
 import './addEmployee.style.css'
 
+
+const initialState = {
+  name:"",
+  email:"",
+  date: "",
+}
+
 export const AddEmployee = () => {
+
+  const [addEmployee, setAddEmployee] = useState(initialState)
+
+const handleOnChange = e => {
+const {name, value} = e.target
+
+setAddEmployee({
+  ...addEmployee,
+  [name]: value
+  
+})
+}
+
+const handleOnSubmit = e =>{
+  e.preventDefault()
+  console.log(addEmployee)
+}
+
+
     return (
         <div>
             <h1 variant= "info"style={{color:"black",textAlign:"center"}}>Added Employees displayed here</h1>
         <Jumbotron className="employee-form"> 
 
-        <Form>
+        <Form onSubmit={handleOnSubmit}>
   <Form.Group controlId="exampleForm.ControlInput1">
     <Form.Label>Full Name</Form.Label>
-    <Form.Control type="text" placeholder="Full Name" />
+    <Form.Control
+    name="name"
+    type="text"
+    value= {addEmployee.name}
+    onChange={handleOnChange}
+    placeholder="Full Name" 
+    required
+      />
 
     <Form.Label>Email</Form.Label>
-    <Form.Control type="email" placeholder="Email" />
-
-
-    <Form.Label>Phone</Form.Label>
-    <Form.Control type="number" placeholder="Phone Number" />
+    <Form.Control 
+    name="email"
+    value={addEmployee.email}
+    onChange={handleOnChange}
+    type="email" 
+    placeholder="Email" 
+    required
+    />
 
     <Form.Label>Joined Date</Form.Label>
-    <Form.Control type="date" placeholder="Joined Date" />
+    <Form.Control
+    name="date"
+    value={addEmployee.date}
+    onChange={handleOnChange}
+     type="date" 
+     placeholder="Joined Date" />
   </Form.Group>
   <Button>Add Employee</Button>
   </Form>

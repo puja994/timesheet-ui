@@ -25,12 +25,12 @@ function App() {
            <Dashboard />
          </Route>
 
-         <Route exact path="/shifts">
+         <Route  path="/shifts">
            <Shifts />
          </Route>
 
 
-         <Route exact path="/employee">
+         <Route  path="/employee">
            <Employee />
          </Route>
 

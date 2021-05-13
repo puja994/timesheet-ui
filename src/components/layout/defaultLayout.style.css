@@ -1,6 +1,6 @@
 .main{
-    height:90vh;
+   min-height:90vh;
 }
 .copyright-text{
-    height:5vh;
+    min-height:5vh;
 }
