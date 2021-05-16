@@ -14,3 +14,15 @@ export const saveShift = frmDt =>{
         }
     })
 }
+
+export const getShifts = ()=> {
+    return new Promise(async(resolve,reject)=>{
+        try{
+            const {data} = await axios.get(shiftApi)
+            resolve(data)
+
+        }catch(error){
+            reject(error)
+        }
+    })
+}

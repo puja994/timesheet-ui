@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import {Form, Col, Jumbotron, Button, Spinner,Alert} from 'react-bootstrap'
+import {Form, Col, Jumbotron, Button, Spinner,Alert, Table} from 'react-bootstrap'
 import {addNewShift} from '../../pages/shifts/shiftsAction'
+
+
 
 
 const initialState = {
   name: "puja",
-  datetime: "",
+  datetime: "12-05-2020",
 }
 export const TimeSheetTable = () => {
   const dispatch = useDispatch()
@@ -36,6 +38,7 @@ export const TimeSheetTable = () => {
   }
 
   const {message,status} = shiftResponse
+ 
 
 
     return (
@@ -90,6 +93,39 @@ export const TimeSheetTable = () => {
 
       </Form>
       </Jumbotron>
+      {/* <AddShiftsForm/> */}
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>shift Date and Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          
+      {timesheet.length ? (
+          timesheet.map((row) => (
+            <tr key={row._id}>
+              <td>{row._id}</td>
+              <td>
+                {row.name}
+              </td>
+              <td>{row.datetime}</td>
+             
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="3" className="text-center">
+              No shifts to show{" "}
+            </td>
+          </tr>
+        )}
+       
+       </tbody>
+     </Table>
       </div>
  
      

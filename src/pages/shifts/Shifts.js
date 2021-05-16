@@ -8,7 +8,7 @@ export const Shifts = () => {
         <DefaultLayout>
             
             <TimeSheetTable/>
-            <AddShiftsForm />
+            {/* <AddShiftsForm /> */}
         </DefaultLayout>
     )
 }

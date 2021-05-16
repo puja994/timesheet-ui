@@ -17,6 +17,10 @@ const shiftsSlice = createSlice({
             state.isLoading = false
            state.shiftResponse = payload
         },
+        fetchShiftSuccess: (state, {payload}) => {
+            state.isLoading = false
+            state.shiftsList = payload.result || []
+        },
         requestFail: (state, {payload})=>{
             state.isLoading = false
             state.shiftResponse = payload
@@ -30,6 +34,7 @@ const {reducer, actions} = shiftsSlice
 export const {
     requestPending,
     addShiftSuccess,
+    fetchShiftSuccess,
     requestFail
 } = actions
 

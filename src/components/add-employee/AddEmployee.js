@@ -1,17 +1,21 @@
 import React, {useState} from 'react'
-import { Jumbotron, Form, Button, ListGroup} from 'react-bootstrap'
+import { useDispatch, useSelector } from "react-redux"
+import { Jumbotron, Form, Button, ListGroup, Spinner, Alert} from 'react-bootstrap'
 import './addEmployee.style.css'
+import {addNewEmployee} from '../../pages/employee/employeeAction'
 
 
 const initialState = {
   name:"",
   email:"",
-  date: "",
+  // date: "",
 }
 
 export const AddEmployee = () => {
+  const dispatch = useDispatch()
 
   const [addEmployee, setAddEmployee] = useState(initialState)
+  const { isLoading, employeeResponse} = useSelector(state => state.employee)
 
 const handleOnChange = e => {
 const {name, value} = e.target
@@ -26,13 +30,24 @@ setAddEmployee({
 const handleOnSubmit = e =>{
   e.preventDefault()
   console.log(addEmployee)
+  dispatch(addNewEmployee(addEmployee))
 }
-
+const {message,status} = employeeResponse
 
     return (
+    
         <div>
             <h1 variant= "info"style={{color:"black",textAlign:"center"}}>Added Employees displayed here</h1>
         <Jumbotron className="employee-form"> 
+        {isLoading && <Spinner variant="primary" animation="border" />}
+
+{message && (
+  <Alert variant={status === "success" ? "success" : "danger"}>
+    {message}
+  </Alert>
+)}
+
+       
 
         <Form onSubmit={handleOnSubmit}>
   <Form.Group controlId="exampleForm.ControlInput1">
@@ -56,15 +71,15 @@ const handleOnSubmit = e =>{
     required
     />
 
-    <Form.Label>Joined Date</Form.Label>
+    {/* <Form.Label>Joined Date</Form.Label>
     <Form.Control
     name="date"
     value={addEmployee.date}
     onChange={handleOnChange}
      type="date" 
-     placeholder="Joined Date" />
+     placeholder="Joined Date" /> */}
   </Form.Group>
-  <Button>Add Employee</Button>
+  <Button type="submit">Add Employee</Button>
   </Form>
    </Jumbotron>
    <hr/>
@@ -77,6 +92,8 @@ const handleOnSubmit = e =>{
   <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
 </ListGroup>
 
+
         </div>
+        
     )
 }
