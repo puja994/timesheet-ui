@@ -21,16 +21,16 @@ function App() {
            <Login />
          </Route>
 
-         <Route  path="/dashboard">
+         <Route exact path="/dashboard">
            <Dashboard />
          </Route>
 
-         <Route  path="/shifts">
+         <Route exact path="/shifts">
            <Shifts />
          </Route>
 
 
-         <Route  path="/employee">
+         <Route exact path="/employee">
            <Employee />
          </Route>
 

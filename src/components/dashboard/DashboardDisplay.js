@@ -1,9 +1,11 @@
 import React from 'react'
 
+
 export const DashboardDisplay = () => {
     return (
         <div>
-            hey this is dashboard display page
+          <h1 style={{color:"sky blue",textAlign:"center"}}>Welcome to manager Dashboard!</h1>
+          
         </div>
     )
 }

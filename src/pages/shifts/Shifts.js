@@ -6,8 +6,9 @@ import { TimeSheetTable } from '../../components/timeSheet-table/TimeSheetTable.
 export const Shifts = () => {
     return (
         <DefaultLayout>
-            <AddShiftsForm />
+            
             <TimeSheetTable/>
+            <AddShiftsForm />
         </DefaultLayout>
     )
 }
