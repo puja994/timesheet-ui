@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import {Form, Col, Jumbotron, Button, Spinner,Alert, Table} from 'react-bootstrap'
 import {addNewShift} from '../../pages/shifts/shiftsAction'
+import { AddEmployee } from '../add-employee/AddEmployee'
 
 
 
@@ -9,6 +10,7 @@ import {addNewShift} from '../../pages/shifts/shiftsAction'
 const initialState = {
   name: "puja",
   datetime: "12-05-2020",
+  employees: [],
 }
 export const TimeSheetTable = () => {
   const dispatch = useDispatch()
@@ -55,8 +57,10 @@ export const TimeSheetTable = () => {
       <Form onSubmit= {handleOnSubmit}>
 
       <Form.Group as={Col} controlId="formGridState">
-      <Form.Label>Name</Form.Label>
-      <Form.Control 
+
+      <Form.Label>Select Employees</Form.Label>
+      <AddEmployee/>
+      {/* <Form.Control 
       as="select" 
       name="name"
       value= {timesheet.name}
@@ -66,7 +70,8 @@ export const TimeSheetTable = () => {
         <option>puja</option>
         <option>sita</option>
         <option>rita</option>
-      </Form.Control>
+      </Form.Control> */}
+
     </Form.Group>
 
     <Form.Group as={Col} controlId = "formGridState">
@@ -105,6 +110,7 @@ export const TimeSheetTable = () => {
 
       <tbody>
           
+        
       {timesheet.length ? (
           timesheet.map((row) => (
             <tr key={row._id}>

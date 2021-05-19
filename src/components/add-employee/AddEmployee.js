@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { Jumbotron, Form, Button, ListGroup, Spinner, Alert} from 'react-bootstrap'
+import { Jumbotron, Form, Button, ListGroup, Spinner, Alert, Table} from 'react-bootstrap'
 import './addEmployee.style.css'
 import {addNewEmployee} from '../../pages/employee/employeeAction'
 
@@ -84,13 +84,49 @@ const {message,status} = employeeResponse
    </Jumbotron>
    <hr/>
    <h1 variant= "info"style={{color:"black",textAlign:"center"}}>Added Employees displayed here</h1>
-   <ListGroup>
+   <Jumbotron>
+      
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+
+      <tbody>
+{/*           
+      {/* {addEmployee.length ? (
+          addEmployee.map((row) => (
+            <tr key={row._id}>
+              <td>{row._id}</td>
+              <td>
+                {row.name}
+              </td>
+              <td>{row.email}</td>
+             
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="3" className="text-center">
+              No shifts to show{" "}
+            </td>
+          </tr>
+        )} */}
+       
+       </tbody> 
+     </Table>
+     </Jumbotron>
+
+   {/* <ListGroup>
   <ListGroup.Item>Employee details inserted here</ListGroup.Item>
   <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
   <ListGroup.Item>Morbi leo risus</ListGroup.Item>
   <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
   <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-</ListGroup>
+</ListGroup> */}
 
 
         </div>
