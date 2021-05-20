@@ -6,7 +6,7 @@ export const addNewEmployee = frmDt => async dispatch => {
     try{
         dispatch(requestPending())
         const result = await saveEmployee(frmDt)
-        console.log(result)
+       
         dispatch(addEmployeeSuccess(result))
         
 

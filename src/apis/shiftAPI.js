@@ -18,7 +18,13 @@ export const saveShift = frmDt =>{
 export const getShifts = ()=> {
     return new Promise(async(resolve,reject)=>{
         try{
-            const {data} = await axios.get(shiftApi)
+            const {data} = await axios.get(shiftApi,{
+               headers: {
+                   Authorization: sessionStorage.getItem("accessJWT")
+               }
+               
+
+            })
             resolve(data)
 
         }catch(error){

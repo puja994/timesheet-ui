@@ -12,7 +12,7 @@ export const addNewShift = frmDt => async dispatch => {
         dispatch(addShiftSuccess(result))
         
 
-        // result.status === "success" && dispatch
+        result.status === "success" && dispatch(fetchShifts())
 
     }catch(error){
         const err = {

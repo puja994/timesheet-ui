@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import {Form, Col, Jumbotron, Button, Spinner,Alert, Table} from 'react-bootstrap'
 import {addNewShift} from '../../pages/shifts/shiftsAction'
-import { AddEmployee } from '../add-employee/AddEmployee'
+import {fetchShifts} from '../../pages/shifts/shiftsAction'
+// import { AddEmployee } from '../add-employee/AddEmployee'
 
 
 
@@ -17,7 +18,13 @@ export const TimeSheetTable = () => {
 
   const [timesheet, setTimesheet] = useState(initialState)
 
-  const { isLoading, shiftResponse} = useSelector(state => state.shifts)
+  const { isLoading, shiftResponse, shiftsList} = useSelector(state => state.shifts)
+  // const { isLoading, shiftResponse} = useSelector(state => state.shiftsList)
+// console.log(shiftsList)
+
+useEffect(() => {
+  !shiftsList && dispatch(fetchShifts());
+}, [dispatch]);
 
   const handleOnChange = e => {
     const {name, value} = e.target
@@ -33,6 +40,8 @@ export const TimeSheetTable = () => {
     e.preventDefault()
 
     dispatch(addNewShift(timesheet))
+
+    // dispatch(fetchShifts(shiftsList))
 
     
     
@@ -59,8 +68,8 @@ export const TimeSheetTable = () => {
       <Form.Group as={Col} controlId="formGridState">
 
       <Form.Label>Select Employees</Form.Label>
-      <AddEmployee/>
-      {/* <Form.Control 
+      {/* <AddEmployee/>  */}
+      <Form.Control 
       as="select" 
       name="name"
       value= {timesheet.name}
@@ -70,7 +79,7 @@ export const TimeSheetTable = () => {
         <option>puja</option>
         <option>sita</option>
         <option>rita</option>
-      </Form.Control> */}
+      </Form.Control>
 
     </Form.Group>
 
@@ -78,47 +87,51 @@ export const TimeSheetTable = () => {
       <Form.Label>Shift Date and Time</Form.Label>
       <Form.Control 
       // type="datetime-local"
-      name="datetime"
+      name="date"
+      type="date"
       value={timesheet.datetime}
       onChange={handleOnChange}
 
  />
     </Form.Group>
 
-    {/* <Form.Group as={Col} controlId = "formGridState">
+     <Form.Group as={Col} controlId = "formGridState">
       <Form.Label>Shift Time</Form.Label>
       <Form.Control
        name="time"
+       type="time"
        value={timesheet.time}
        onChange={handleOnChange}
         />
-    </Form.Group> */}
+    </Form.Group> 
 
     <Button type="submit" variant="info" block>Add</Button>
 
       </Form>
       </Jumbotron>
-      {/* <AddShiftsForm/> */}
-      <Table striped bordered hover>
+      {/* <AddShiftsForm/>  */}
+       <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
           <th>Name</th>
           <th>shift Date and Time</th>
+          <th>Delete</th>
         </tr>
       </thead>
 
       <tbody>
           
         
-      {timesheet.length ? (
-          timesheet.map((row) => (
+      {shiftsList?.length ? (
+          shiftsList.map((row) => (
             <tr key={row._id}>
               <td>{row._id}</td>
               <td>
                 {row.name}
               </td>
               <td>{row.datetime}</td>
+              <td><Button variant="info">Delete</Button></td>
              
             </tr>
           ))
