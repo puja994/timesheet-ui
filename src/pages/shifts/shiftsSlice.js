@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
     isLoading: false,
     shiftResponse: {},
+    deleteMsg: "",
     shiftsList: []
 }
 
@@ -21,6 +22,11 @@ const shiftsSlice = createSlice({
             state.isLoading = false
             state.shiftsList = payload.result || []
         },
+        deleteShiftSuccess: (state, { payload }) => {
+			state.isLoading = false;
+			// state.status = payload.status;
+			state.deleteMsg = payload.message;
+		},
         requestFail: (state, {payload})=>{
             state.isLoading = false
             state.shiftResponse = payload
@@ -35,6 +41,7 @@ export const {
     requestPending,
     addShiftSuccess,
     fetchShiftSuccess,
+    deleteShiftSuccess,
     requestFail
 } = actions
 

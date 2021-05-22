@@ -32,3 +32,15 @@ export const getShifts = ()=> {
         }
     })
 }
+
+export const shiftDelete = _id => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const { data } = await axios.delete(shiftApi, { data: { _id } });
+
+			resolve(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};

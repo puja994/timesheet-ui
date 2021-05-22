@@ -1,8 +1,8 @@
 import { requestPending,
-    addShiftSuccess, fetchShiftSuccess,
+    addShiftSuccess, fetchShiftSuccess, deleteShiftSuccess,
     requestFail} from './shiftsSlice'
 
-import {saveShift, getShifts} from '../../apis/shiftAPI'
+import {saveShift, getShifts, shiftDelete} from '../../apis/shiftAPI'
 
 export const addNewShift = frmDt => async dispatch => {
     try{
@@ -40,3 +40,22 @@ export const fetchShifts = () => async dispatch => {
 
     }
 }
+
+export const deleteShift = _id => async dispatch => {
+	try {
+		dispatch(requestPending());
+
+		const result = await shiftDelete(_id); //{status, message, result:[]}
+
+		dispatch(deleteShiftSuccess(result));
+
+		result.status === "success" && dispatch(fetchShifts());
+	} catch (error) {
+		const err = {
+			status: "error",
+			message: error.message,
+		};
+
+		dispatch(requestFail(err));
+	}
+};

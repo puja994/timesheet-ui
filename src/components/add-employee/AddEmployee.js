@@ -1,21 +1,40 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { Jumbotron, Form, Button, ListGroup, Spinner, Alert, Table} from 'react-bootstrap'
 import './addEmployee.style.css'
-import {addNewEmployee} from '../../pages/employee/employeeAction'
+import {addNewEmployee, fetchEmployees, deleteEmployee} from '../../pages/employee/employeeAction'
+import {toggleEmployeeEditModal, selectAEmployee} from '../../pages/employee/employeeSlice'
+import {EditEmployeeForm} from '../editEmployee/EditEmployeeForm'
 
 
 const initialState = {
   name:"",
   email:"",
-  // date: "",
+  
 }
 
 export const AddEmployee = () => {
   const dispatch = useDispatch()
 
   const [addEmployee, setAddEmployee] = useState(initialState)
-  const { isLoading, employeeResponse} = useSelector(state => state.employee)
+  const { isLoading, employeeResponse, employeeList, deleteMsg} = useSelector(state => state.employee)
+  const { employeeLists, selectedEmployee } = useSelector(
+		state => state.employee
+	);
+
+	const [showForm, setShowForm] = useState("");
+
+  const handleOnDeleteClicked = _id  => {
+    dispatch(deleteEmployee(_id));
+  }
+
+  useEffect(() => {
+    !employeeList && dispatch(fetchEmployees());
+  }, [dispatch]);
+
+  useEffect(() => {
+		dispatch(fetchEmployees());
+	}, []);
 
 const handleOnChange = e => {
 const {name, value} = e.target
@@ -32,6 +51,17 @@ const handleOnSubmit = e =>{
   console.log(addEmployee)
   dispatch(addNewEmployee(addEmployee))
 }
+
+const handleEdit = _id => {
+  dispatch(toggleEmployeeEditModal());
+  // console.log(_id);
+  // const employeeItme = employeeLists.filter(row => row._id === _id)[0];
+  dispatch(selectAEmployee());
+
+  showForm === _id ? setShowForm("") : setShowForm(_id);
+}
+
+
 const {message,status} = employeeResponse
 
     return (
@@ -85,48 +115,72 @@ const {message,status} = employeeResponse
    <hr/>
    <h1 variant= "info"style={{color:"black",textAlign:"center"}}>Added Employees displayed here</h1>
    <Jumbotron>
+   {isLoading && <Spinner variant="primary" animation="border" />}
+   {deleteMsg && (
+  <Alert variant={status === "success" ? "success" : "danger"}>
+    {deleteMsg}
+  </Alert>
+)}
       
       <Table striped bordered hover>
       <thead>
         <tr>
-          <th>#</th>
+          <th>Employee Id</th>
           <th>Name</th>
           <th>Email</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
 
       <tbody>
-{/*           
-      {/* {addEmployee.length ? (
-          addEmployee.map((row) => (
+          
+      {/* {employeeList.length ? (
+          employeeList.map((row) => (
             <tr key={row._id}>
               <td>{row._id}</td>
               <td>
                 {row.name}
               </td>
               <td>{row.email}</td>
+              <td><Button>Edit</Button></td>
+              <td><Button 
+              onClick = {()=> handleOnDeleteClicked(row._id)}
+              variant="info"
+              >Delete</Button></td>
              
             </tr>
           ))
         ) : (
           <tr>
-            <td colSpan="3" className="text-center">
+            <td colSpan="6" className="text-center">
               No shifts to show{" "}
             </td>
           </tr>
         )} */}
+        <EditEmployeeForm/>
        
+       { (
+          employeeList.map((row) => (
+            <tr key={row._id}>
+              <td>{row._id}</td>
+              <td>
+                {row.name}
+              </td>
+              <td>{row.email}</td>
+              <td><Button variant="info" onClick={() => handleEdit(row._id)}>Edit</Button></td>
+              <td><Button 
+              onClick = {()=> handleOnDeleteClicked(row._id)}
+              variant="info"
+              >Delete</Button></td>
+             
+            </tr>
+          ))
+        ) }
        </tbody> 
      </Table>
      </Jumbotron>
 
-   {/* <ListGroup>
-  <ListGroup.Item>Employee details inserted here</ListGroup.Item>
-  <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-  <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-  <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-  <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-</ListGroup> */}
 
 
         </div>
