@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { Jumbotron, Form, Button, ListGroup, Spinner, Alert, Table} from 'react-bootstrap'
 import './addEmployee.style.css'
 import {addNewEmployee, fetchEmployees, deleteEmployee} from '../../pages/employee/employeeAction'
-import {toggleEmployeeEditModal, selectAEmployee} from '../../pages/employee/employeeSlice'
-import {EditEmployeeForm} from '../editEmployee/EditEmployeeForm'
+// import {toggleEmployeeEditModal, selectAEmployee} from '../../pages/employee/employeeSlice'
+// import {EditEmployeeForm} from '../editEmployee/EditEmployeeForm'
 
 
 const initialState = {
@@ -18,11 +18,11 @@ export const AddEmployee = () => {
 
   const [addEmployee, setAddEmployee] = useState(initialState)
   const { isLoading, employeeResponse, employeeList, deleteMsg} = useSelector(state => state.employee)
-  const { employeeLists, selectedEmployee } = useSelector(
-		state => state.employee
-	);
+  // const { employeeLists, selectedEmployee } = useSelector(
+	// 	state => state.employee
+	// );
 
-	const [showForm, setShowForm] = useState("");
+	// const [showForm, setShowForm] = useState("");
 
   const handleOnDeleteClicked = _id  => {
     dispatch(deleteEmployee(_id));
@@ -52,14 +52,14 @@ const handleOnSubmit = e =>{
   dispatch(addNewEmployee(addEmployee))
 }
 
-const handleEdit = _id => {
-  dispatch(toggleEmployeeEditModal());
-  // console.log(_id);
-  // const employeeItme = employeeLists.filter(row => row._id === _id)[0];
-  dispatch(selectAEmployee());
+// const handleEdit = _id => {
+//   dispatch(toggleEmployeeEditModal());
+//   // console.log(_id);
+//   // const employeeItme = employeeLists.filter(row => row._id === _id)[0];
+//   dispatch(selectAEmployee());
 
-  showForm === _id ? setShowForm("") : setShowForm(_id);
-}
+//   showForm === _id ? setShowForm("") : setShowForm(_id);
+// }
 
 
 const {message,status} = employeeResponse
@@ -158,7 +158,7 @@ const {message,status} = employeeResponse
             </td>
           </tr>
         )} */}
-        <EditEmployeeForm/>
+        {/* <EditEmployeeForm/> */}
        
        { (
           employeeList.map((row) => (
@@ -168,7 +168,7 @@ const {message,status} = employeeResponse
                 {row.name}
               </td>
               <td>{row.email}</td>
-              <td><Button variant="info" onClick={() => handleEdit(row._id)}>Edit</Button></td>
+              <td><Button variant="info" >Edit</Button></td>
               <td><Button 
               onClick = {()=> handleOnDeleteClicked(row._id)}
               variant="info"

@@ -4,14 +4,19 @@ import {Form, Col, Jumbotron, Button, Spinner,Alert, Table} from 'react-bootstra
 import {addNewShift} from '../../pages/shifts/shiftsAction'
 import {fetchShifts, deleteShift} from '../../pages/shifts/shiftsAction'
 // import { AddEmployee } from '../add-employee/AddEmployee'
+import {ShiftEmployeeList} from '../shift-employee-lists/ShiftEmployeeList'
+
+
+
 
 
 
 
 const initialState = {
-  name: "puja",
+  name: [],
   date: new Date().toLocaleDateString(),
-  time: new Date().toLocaleTimeString()
+  startTime: new Date().toLocaleTimeString(),
+  endTime: new Date().toLocaleTimeString()
   // employees: [],
 }
 export const TimeSheetTable = () => {
@@ -54,15 +59,31 @@ useEffect(() => {
 
   const handleOnSubmit = e => {
     e.preventDefault()
-
+console.log(timesheet)
     dispatch(addNewShift(timesheet))
+    
 
     // dispatch(fetchShifts(shiftsList))
-
-    
-    
-    
   }
+
+  const onCatSelect = e => {
+		const { checked, value } = e.target;
+		if (checked) {
+			//PUT _ID IN SIDE THE ARRAY
+			setTimesheet({
+				...timesheet,
+				name: [...timesheet.name, value],
+			});
+		} else {
+			//take _id out of the array
+			const updatedCatIds = timesheet.name.filter(id => id !== value);
+
+			setTimesheet({
+				...timesheet,
+				name: updatedCatIds,
+			});
+		}
+	};
 
   const {message,status} = shiftResponse
  
@@ -85,7 +106,7 @@ useEffect(() => {
 
       <Form.Label>Select Employees</Form.Label>
       {/* <AddEmployee/>  */}
-      <Form.Control 
+      {/* <Form.Control 
       as="select" 
       name="name"
       value= {timesheet.name}
@@ -95,7 +116,12 @@ useEffect(() => {
         <option>puja</option>
         <option>sita</option>
         <option>rita</option>
-      </Form.Control>
+      </Form.Control> */}
+      <ShiftEmployeeList
+      onCatSelect={onCatSelect}
+      selectedCatIds={timesheet.name}
+
+      />
 
     </Form.Group>
 
@@ -112,11 +138,22 @@ useEffect(() => {
     </Form.Group>
 
      <Form.Group as={Col} controlId = "formGridState">
-      <Form.Label>Shift Time</Form.Label>
+      <Form.Label>Shift Start Time</Form.Label>
       <Form.Control
-       name="time"
+       name="startTime"
        type="time"
-       value={timesheet.time}
+       value={timesheet.startTime}
+       onChange={handleOnChange}
+        />
+    </Form.Group> 
+
+
+    <Form.Group as={Col} controlId = "formGridState">
+      <Form.Label>Shift End Time</Form.Label>
+      <Form.Control
+       name="endTime"
+       type="time"
+       value={timesheet.endTime}
        onChange={handleOnChange}
         />
     </Form.Group> 
@@ -141,7 +178,8 @@ useEffect(() => {
           <th>Employee Id</th>
           <th>Name</th>
           <th>shift Date </th>
-          <th>shift Time  </th>
+          <th>shift Start Time  </th>
+          <th>shift End Time  </th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -157,6 +195,7 @@ useEffect(() => {
                 {row.name}
               </td>
               <td>{row.date}</td>
+              <td>{row.time}</td>
               <td>{row.time}</td>
               <td><Button 
               onClick = {()=> handleOnDeleteClicked(row._id)}
