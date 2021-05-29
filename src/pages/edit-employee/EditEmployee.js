@@ -1,9 +1,9 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { EditProductForm } from "../../components/edit-product-form/EditProductForm";
+import { EditEmployeeForm } from "../../components/edit-employee-form/EditEmployeeForm";
 import DefaultLayout from "../../components/layout/DefaultLayout";
 
-const EditProduct = () => {
+const EditEmployee = () => {
 	return (
 		<DefaultLayout>
 			<h1>Update Product</h1>
@@ -11,11 +11,11 @@ const EditProduct = () => {
 
 			<div className="add-new-product-form">
 				<Card className="p-4">
-					<EditProductForm />
+					<EditEmployeeForm />
 				</Card>
 			</div>
 		</DefaultLayout>
 	);
 };
 
-export default EditProduct;
+export default EditEmployee;

@@ -91,7 +91,7 @@ console.log(timesheet)
 
     return (
     <div>
-      <h1>Add Shifts</h1>
+      <h1 style={{color:"black",textAlign:"center"}}>Add Shifts</h1>
       <Jumbotron>
       {isLoading && <Spinner variant="primary" animation="border" />}
 

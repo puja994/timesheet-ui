@@ -53,3 +53,15 @@ export const updateEmployee = frmDt => {
 		}
 	});
 };
+
+export const getAEmployee = _id => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const { data } = await axios.get(employeeApi + "/" + _id);
+
+			resolve(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};

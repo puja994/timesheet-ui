@@ -1,11 +1,11 @@
 import {
 	requestPending,
-	fetchProductSuccess,
-	updateProductSuccess,
+	fetchEmployeeSuccess,
+	updateEmployeeSuccess,
 	requestFail,
-} from "./selectedProductSlice";
+} from "./selectedEmployeeSlice";
 
-import { getAProduct, updateProduct } from "../../apis/productAPI";
+import { getAEmployee, updateEmployee} from "../../apis/employeeAPI";
 // export const addNewProduct = frmDt => async dispatch => {
 // 	try {
 // 		dispatch(requestPending());
@@ -25,12 +25,12 @@ import { getAProduct, updateProduct } from "../../apis/productAPI";
 // 	}
 // };
 
-export const fetchAProduct = _id => async dispatch => {
+export const fetchAEmployee = _id => async dispatch => {
 	try {
 		dispatch(requestPending());
 
-		const result = await getAProduct(_id); //{status, message, result:{}}
-		dispatch(fetchProductSuccess(result));
+		const result = await getAEmployee(_id); //{status, message, result:{}}
+		dispatch(fetchEmployeeSuccess(result));
 	} catch (error) {
 		const err = {
 			status: "error",
@@ -41,12 +41,12 @@ export const fetchAProduct = _id => async dispatch => {
 	}
 };
 
-export const updateAProduct = formDt => async dispatch => {
+export const updateAEmployee = formDt => async dispatch => {
 	try {
 		dispatch(requestPending());
 
-		const result = await updateProduct(formDt); //{status, message, result:{}}
-		dispatch(updateProductSuccess(result));
+		const result = await updateEmployee(formDt); //{status, message, result:{}}
+		dispatch(updateEmployeeSuccess(result));
 	} catch (error) {
 		const err = {
 			status: "error",

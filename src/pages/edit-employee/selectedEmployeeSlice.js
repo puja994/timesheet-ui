@@ -4,24 +4,24 @@ const initialState = {
 	isLoading: false,
 	status: "",
 	message: "",
-	product: {},
+	employee: {},
 };
 
-const selectedProductSlice = createSlice({
-	name: "editProduct",
+const selectedEmployeeSlice = createSlice({
+	name: "editEmployee",
 	initialState,
 	reducers: {
 		requestPending: state => {
 			state.isLoading = true;
 		},
-		updateProductSuccess: (state, { payload }) => {
+		updateEmployeeSuccess: (state, { payload }) => {
 			state.isLoading = false;
 			state.status = payload.status;
 			state.message = payload.message;
 		},
 
-		fetchProductSuccess: (state, { payload }) => {
-			state.product = payload.result || {};
+		fetchEmployeeSuccess: (state, { payload }) => {
+			state.employee = payload.result || {};
 			state.isLoading = false;
 		},
 
@@ -33,12 +33,12 @@ const selectedProductSlice = createSlice({
 	},
 });
 
-const { reducer, actions } = selectedProductSlice;
+const { reducer, actions } = selectedEmployeeSlice;
 
 export const {
 	requestPending,
-	fetchProductSuccess,
-	updateProductSuccess,
+	fetchEmployeeSuccess,
+	updateEmployeeSuccess,
 	requestFail,
 } = actions;
 

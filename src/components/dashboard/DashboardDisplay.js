@@ -4,6 +4,7 @@ import './dashboard.css'
 import first from '../assets/shifts.png'
 import middle from '../assets/data.png'
 import second from '../assets/data.png'
+import {Link} from 'react-router-dom'
 
 
 
@@ -29,7 +30,8 @@ export const DashboardDisplay = () => {
       Some quick example text to build on the card title and make up the bulk of
       the card's content.
     </Card.Text>
-    <Button variant="success">Add New Employee</Button>
+    <Button variant="dark"> <Link to={`/employee`}>Add New Employee</Link></Button>
+    
   </Card.Body>
 </Card>
 
@@ -56,7 +58,7 @@ export const DashboardDisplay = () => {
       Some quick example text to build on the card title and make up the bulk of
       the card's content.
     </Card.Text>
-    <Button variant="success">Add New Shift</Button>
+    <Button variant="dark"><Link to={`/shifts`}>Add New Shifts</Link></Button>
   </Card.Body>
 </Card>
 

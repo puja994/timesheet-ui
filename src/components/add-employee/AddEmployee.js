@@ -67,7 +67,7 @@ const {message,status} = employeeResponse
     return (
     
         <div>
-            <h1 variant= "info"style={{color:"black",textAlign:"center"}}>Added Employees displayed here</h1>
+            <h2 variant= "info"style={{color:"black",textAlign:"center"}}>Add New Employees Details</h2>
         <Jumbotron className="employee-form"> 
         {isLoading && <Spinner variant="primary" animation="border" />}
 
@@ -113,7 +113,7 @@ const {message,status} = employeeResponse
   </Form>
    </Jumbotron>
    <hr/>
-   <h1 variant= "info"style={{color:"black",textAlign:"center"}}>Added Employees displayed here</h1>
+   <h3 variant= "info"style={{color:"black",textAlign:"center"}}>Added Employees displayed here</h3>
    <Jumbotron>
    {isLoading && <Spinner variant="primary" animation="border" />}
    {deleteMsg && (
