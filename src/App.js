@@ -6,6 +6,8 @@ import {Employee} from './pages/employee/Employee'
 import {Shifts} from './pages/shifts/Shifts'
 import Profile from "./pages/profile/Profile"
 import PasswordReset from "./pages/password-reset/PasswordReset"
+import EditEmployee from './pages/edit-employee/EditEmployee';
+import { Availability } from './pages/availability/Availability';
 
 
 
@@ -24,6 +26,10 @@ function App() {
            <Dashboard />
          </Route>
 
+         <Route exact path="/availability">
+           <Availability/>
+         </Route>
+
          <Route exact path="/shifts">
            <Shifts />
          </Route>
@@ -31,6 +37,12 @@ function App() {
 
          <Route exact path="/employee">
            <Employee />
+         </Route>
+
+         
+
+         <Route exact path="/employee/:_id">
+           <EditEmployee/>
          </Route>
 
          <Route path="/profile">

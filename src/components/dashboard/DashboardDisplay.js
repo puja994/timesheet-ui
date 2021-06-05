@@ -27,8 +27,7 @@ export const DashboardDisplay = () => {
   <Card.Body>
     <Card.Title>Employee</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      In this employee page you can add new employee with their name and email address.
     </Card.Text>
     <Button variant="dark"> <Link to={`/employee`}>Add New Employee</Link></Button>
     
@@ -40,12 +39,11 @@ export const DashboardDisplay = () => {
   {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
   <img src={first} />
   <Card.Body>
-    <Card.Title>Performance Values</Card.Title>
+    <Card.Title>How to use </Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      If you have new employee add them through employee page, after that employee will get listed on shifts page where you can select employee and assign shifts for them.
     </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
+    {/* <Button variant="primary">Go somewhere</Button> */}
   </Card.Body>
 </Card>
 
@@ -55,8 +53,7 @@ export const DashboardDisplay = () => {
   <Card.Body>
     <Card.Title>Time Sheet</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      In this page you can assign shift date, start time and end time for the desired employee.
     </Card.Text>
     <Button variant="dark"><Link to={`/shifts`}>Add New Shifts</Link></Button>
   </Card.Body>

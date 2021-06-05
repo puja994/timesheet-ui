@@ -5,10 +5,7 @@ import {addNewShift} from '../../pages/shifts/shiftsAction'
 import {fetchShifts, deleteShift} from '../../pages/shifts/shiftsAction'
 // import { AddEmployee } from '../add-employee/AddEmployee'
 import {ShiftEmployeeList} from '../shift-employee-lists/ShiftEmployeeList'
-
-
-
-
+import './table.css'
 
 
 
@@ -20,19 +17,19 @@ const initialState = {
   // employees: [],
 }
 export const TimeSheetTable = () => {
+
   const dispatch = useDispatch()
 
   const [timesheet, setTimesheet] = useState(initialState)
 
   const { isLoading, shiftResponse, shiftsList, deleteMsg} = useSelector(state => state.shifts)
-  // const { isLoading, shiftResponse} = useSelector(state => state.shiftsList)
-// console.log(shiftsList)
-// const Message = ({ variant, children }) => {
-//   const [timeOut, setTimeOut] = useState(null)
+  const { employeeList } = useSelector(state => state.employee);
 
-//   setTimeout(() => {
-//     setTimeOut(1)
-//   }, 3000)
+
+useEffect(() => {
+  !shiftsList && dispatch(fetchShifts());
+  dispatch(fetchShifts());
+}, [dispatch]);
 
 
 
@@ -40,13 +37,8 @@ const handleOnDeleteClicked = _id  => {
   dispatch(deleteShift(_id));
 }
 
-useEffect(() => {
-  !shiftsList && dispatch(fetchShifts());
-}, [dispatch]);
 
-useEffect(() => {
-  dispatch(fetchShifts());
-}, []);
+
   const handleOnChange = e => {
     const {name, value} = e.target
   
@@ -59,8 +51,23 @@ useEffect(() => {
 
   const handleOnSubmit = e => {
     e.preventDefault()
-console.log(timesheet)
-    dispatch(addNewShift(timesheet))
+
+    if(!timesheet.name.length)
+      return alert("Please select the names")
+
+   const empInfo = timesheet.name.map(id => {
+     return {
+       eId: id,
+       name: employeeList.filter(row=> row._id === id)[0].name
+     }
+   })
+   
+   const {name, ...rest} = timesheet
+   const newTimeSet = {
+     ...rest,
+     empInfo
+   }
+    dispatch(addNewShift(newTimeSet))
     
 
     // dispatch(fetchShifts(shiftsList))
@@ -87,6 +94,7 @@ console.log(timesheet)
 
   const {message,status} = shiftResponse
  
+  console.log(shiftsList, ">>>>>")
 
 
     return (
@@ -105,18 +113,7 @@ console.log(timesheet)
       <Form.Group as={Col} controlId="formGridState">
 
       <Form.Label>Select Employees</Form.Label>
-      {/* <AddEmployee/>  */}
-      {/* <Form.Control 
-      as="select" 
-      name="name"
-      value= {timesheet.name}
-      onChange={handleOnChange}
-      defaultValue="Choose...">
-        <option>Choose...</option>
-        <option>puja</option>
-        <option>sita</option>
-        <option>rita</option>
-      </Form.Control> */}
+       
       <ShiftEmployeeList
       onCatSelect={onCatSelect}
       selectedCatIds={timesheet.name}
@@ -128,9 +125,10 @@ console.log(timesheet)
     <Form.Group as={Col} controlId = "formGridState">
       <Form.Label>Shift Date</Form.Label>
       <Form.Control 
-      // type="datetime-local"
       name="date"
       type="date"
+      min="2021-06-01"
+      max="2021-06-30"
       value={timesheet.date}
       onChange={handleOnChange}
 
@@ -175,7 +173,6 @@ console.log(timesheet)
        <Table striped bordered hover>
       <thead>
         <tr>
-          <th>Employee Id</th>
           <th>Name</th>
           <th>shift Date </th>
           <th>shift Start Time  </th>
@@ -190,13 +187,18 @@ console.log(timesheet)
       {shiftsList?.length ? (
           shiftsList.map((row) => (
             <tr key={row._id}>
-              <td>{row._id}</td>
               <td>
-                {row.name}
+                <ul>
+                {row.empInfo.map(emp => (
+                  <li>
+                    {emp.name}
+                  </li>
+                ))}
+                </ul>
               </td>
               <td>{row.date}</td>
-              <td>{row.time}</td>
-              <td>{row.time}</td>
+              <td>{row.startTime}</td>
+              <td>{row.endTime}</td>
               <td><Button 
               onClick = {()=> handleOnDeleteClicked(row._id)}
               variant="info"

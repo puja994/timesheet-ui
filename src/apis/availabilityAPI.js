@@ -1,13 +1,12 @@
 import axios from 'axios'
 
 const rootUrl = "http://localhost:8000/api/v1/"
-const shiftApi = rootUrl + "shifts"
+const availabilityApi = rootUrl + "availability"
 
-export const saveShift = frmDt =>{
-   console.log(frmDt)
+export const saveAvailability = frmDt =>{
     return new Promise (async (resolve,reject)=>{
         try{
-            const {data} = await axios.post(shiftApi, frmDt)
+            const {data} = await axios.post(availabilityApi, frmDt)
             resolve(data)
 
         }catch(error){
@@ -16,10 +15,10 @@ export const saveShift = frmDt =>{
     })
 }
 
-export const getShifts = ()=> {
+export const getAvailability = ()=> {
     return new Promise(async(resolve,reject)=>{
         try{
-            const {data} = await axios.get(shiftApi,{
+            const {data} = await axios.get(availabilityApi,{
                headers: {
                    Authorization: sessionStorage.getItem("accessJWT")
                }
@@ -34,10 +33,10 @@ export const getShifts = ()=> {
     })
 }
 
-export const shiftDelete = _id => {
+export const availabilityDelete = _id => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const { data } = await axios.delete(shiftApi, { data: { _id } });
+			const { data } = await axios.delete(availabilityApi, { data: { _id } });
 
 			resolve(data);
 		} catch (error) {

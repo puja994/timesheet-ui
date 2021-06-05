@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
     const { adminProfile } = useSelector(state => state.profile);
   
     const handleOnLogout = () => {
-      console.log("logging out./..");
+      console.log("logging out");
   
       dispatch(logOut(adminProfile?._id));
       history.push("/");
@@ -28,7 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
         <Navbar collapseOnSelect bg="info" variant="dark" expand="md" className="color-nav">
 
         <Navbar.Brand>
-          Time Sheet System
+          TIME SHEET SYSTEM
         </Navbar.Brand> 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -44,6 +44,10 @@ import { useDispatch, useSelector } from "react-redux";
 
             <LinkContainer to="/employee">
               <Nav.Link>EMPLOYEE</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/availability">
+              <Nav.Link>SHIFTS REQUESTS</Nav.Link>
               </LinkContainer>
     
             <Nav.Link onClick={handleOnLogout} style={{ cursor: "pointer" }}>LOGOUT</Nav.Link>

@@ -31,7 +31,7 @@ export const EditEmployeeForm = () => {
 		}
 	}, [dispatch, employee, editEmployee, _id]);
 
-	// product._id !== editProduct._id && setEditProduct(product);
+	employee._id !== editEmployee._id && setEditEmployee(employee);
 
 	const handleOnchange = e => {
 		const { name, value, checked } = e.target;
@@ -64,19 +64,24 @@ export const EditEmployeeForm = () => {
 
 
 	return (
+	
+		
 		<div>
-			{isLoading && <Spinner variant="primary" animation="border" />}
+			hi edit page here
+			 {/* {isLoading && <Spinner variant="primary" animation="border" />} 
 
-			{message && (
+			 {message && (
 				<Alert variant={status === "success" ? "success" : "danger"}>
 					{message}
 				</Alert>
-			)}
+			)}  */}
 
 			{!employee._id ? (
 				<h1>Employee is not found</h1>
 			) : (
+				
 				<Form onSubmit={handleOnSubmit} >
+					
 					<Form.Group controlId="formBasicEmail">
 						<Form.Label>Name</Form.Label>
 						<Form.Control
@@ -98,16 +103,23 @@ export const EditEmployeeForm = () => {
 							required
 							disabled
 						/>
+						</Form.Group>
 						
 					<hr />
 					
 					<Button variant="primary" type="submit">
 						Update Product
 					</Button>
+					
+					
 				</Form>
+				
 
 			
+				
 			)}
-		</div>
+				</div>
+		
+		
 	);
 };
