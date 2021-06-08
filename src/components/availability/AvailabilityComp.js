@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import {fetchAvailability} from '../../pages/availability/availabilityAction'
-import {Jumbotron, Spinner, Table} from 'react-bootstrap'
+import {fetchAvailability, deleteAvailability} from '../../pages/availability/availabilityAction'
+import {Jumbotron, Spinner, Table, Button} from 'react-bootstrap'
 import { useHistory } from "react-router-dom"
 
 export const AvailabilityComp = () => {
@@ -16,6 +16,14 @@ export const AvailabilityComp = () => {
     useEffect(() => {
       dispatch(fetchAvailability());
     }, [dispatch]);
+
+    const handleOnDeleteClicked = _id  => {
+      dispatch(deleteAvailability(_id));
+    }
+    const handleOnEditClicked = _id => {
+      alert("please fill details manually on shift page!")
+      dispatch(deleteAvailability(_id));
+    }
 
     
     return (
@@ -43,6 +51,15 @@ export const AvailabilityComp = () => {
                       <td><strong>Date:</strong>  {item.date}</td>
                       <td> <strong>Start Time:</strong>   {item.startTime}</td>
                       <td> <strong>End Time</strong>  {item.endTime}</td>
+                      <td><Button
+                      variant="info"
+                      onClick= {()=> handleOnEditClicked(item._id)}
+                      >Confirm</Button></td>
+                      <td><Button 
+                      variant="info"
+                      onClick = {()=> handleOnDeleteClicked(item._id)}
+                      >Delete</Button></td>
+                      
                     </tr>
                     
                     

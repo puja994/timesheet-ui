@@ -45,7 +45,10 @@ export const employeeDelete = _id => {
 export const updateEmployee = frmDt => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const { data } = await axios.put(employeeApi, frmDt);
+			
+			const { data } = await axios.put(employeeApi, frmDt)
+			console.log(data)
+			
 
 			resolve(data);
 		} catch (error) {

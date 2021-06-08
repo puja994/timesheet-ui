@@ -140,6 +140,7 @@ const handleOnDeleteClicked = _id  => {
       <Form.Control
        name="startTime"
        type="time"
+       ng-model="time"
        value={timesheet.startTime}
        onChange={handleOnChange}
         />

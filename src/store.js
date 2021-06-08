@@ -3,8 +3,9 @@ import loginReducer from "./pages/login/loginSlice";
 import profileReducer from "./pages/profile/profileSlice";
 import shiftsReducer from "./pages/shifts/shiftsSlice"
 import employeeReducer from './pages/employee/employeeSlice'
-import selectedEmployeeReducer from './pages/employee/employeeSlice'
+import selectedEmployeeReducer from "./pages/edit-employee/selectedEmployeeSlice"
 import availabilityReducer from './pages/availability/availabilitySlice'
+
 
 const store = configureStore({
 	reducer: {
@@ -12,7 +13,7 @@ const store = configureStore({
 		profile: profileReducer,
 		shifts: shiftsReducer,
 		employee: employeeReducer,
-		selectedEmployee: selectedEmployeeReducer,
+		editEmployee: selectedEmployeeReducer,
 		availability: availabilityReducer,
 
 	},

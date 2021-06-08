@@ -6,8 +6,7 @@ import {DefaultLayout} from "../../components/layout/DefaultLayout";
 const EditEmployee = () => {
 	return (
 		<DefaultLayout>
-			<h1>Update Product</h1>
-			<hr />
+			
 
 			<div className="add-new-product-form">
 				<Card className="p-4">

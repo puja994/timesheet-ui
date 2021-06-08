@@ -6,40 +6,44 @@ import {
 	updateAEmployee,
 } from "../../pages/edit-employee/editEmployeeAction";
 import { useParams } from "react-router-dom";
-// import { ProductCatList } from "../product-category-lists/ProductCatList";
+
 
 const initialState = {
 	name: "",
-	employee: [],
+	email: "",
 };
 
 export const EditEmployeeForm = () => {
 	const dispatch = useDispatch();
 	const { _id } = useParams();
+	console.log(_id, "frmedit")
 
-	const { isLoading, status, message, employee } = useSelector(
-		state => state.selectedEmployee
+	const { isLoading, updateSuccessResponse, employee } = useSelector(
+		state => state.editEmployee
 	);
 	const [editEmployee, setEditEmployee] = useState(initialState);
 	
 
 	useEffect(() => {
 		//call api and update our state for a individual product
-		if (!editEmployee._id || editEmployee._id !== employee._id) {
+		// if (!editEmployee._id || editEmployee._id !== employee._id) {
 			dispatch(fetchAEmployee(_id));
-			setEditEmployee(employee);
-		}
-	}, [dispatch, employee, editEmployee, _id]);
+		
+		// }
+	}, [ _id]);
 
-	employee._id !== editEmployee._id && setEditEmployee(employee);
+	// employee._id !== editEmployee._id && setEditEmployee(employee);
 
 	const handleOnchange = e => {
 		const { name, value, checked } = e.target;
 		let val = value;
-		if (name === "status") {
-			val = checked;
-		}
-		console.log(name, value, checked);
+		// if (name === "status") {
+		// 	val = checked;
+		// }
+		// // if (name === "status") {
+		// 	val = checked;
+		// }
+		// console.log(name, value, checked);
 		setEditEmployee({
 			...editEmployee,
 			[name]: val,
@@ -48,16 +52,14 @@ export const EditEmployeeForm = () => {
 
 	const handleOnSubmit = e => {
 		e.preventDefault();
-		const { __v, ...updateEmployee } = editEmployee;
+		// const { __v, ...updateEmployee } = editEmployee;
 		
 
-		const formData = new FormData();
-
-		//append form data
-		Object.keys(updateEmployee).map(key => {
-			formData.append(key, updateEmployee[key]);
-		});
-
+		const formData = {
+			editEmployee, _id
+		}
+		console.log(editEmployee)
+   
 		
 		dispatch(updateAEmployee(formData));
 	};
@@ -67,18 +69,15 @@ export const EditEmployeeForm = () => {
 	
 		
 		<div>
-			hi edit page here
-			 {/* {isLoading && <Spinner variant="primary" animation="border" />} 
+			<h2 variant= "info"style={{color:"black",textAlign:"center"}}>Edit Employee</h2>
+			
+			 {isLoading && <Spinner variant="primary" animation="border" />} 
 
-			 {message && (
-				<Alert variant={status === "success" ? "success" : "danger"}>
-					{message}
+			 {updateSuccessResponse.message && (
+				<Alert variant={updateSuccessResponse.status === "success" ? "success" : "danger"}>
+					{updateSuccessResponse.message}
 				</Alert>
-			)}  */}
-
-			{!employee._id ? (
-				<h1>Employee is not found</h1>
-			) : (
+			)} 
 				
 				<Form onSubmit={handleOnSubmit} >
 					
@@ -100,26 +99,28 @@ export const EditEmployeeForm = () => {
 							name="email"
 							type="email"
 							value={editEmployee.email}
+							onChange={handleOnchange}
+							placeholder="Enter Email here"
 							required
-							disabled
+							
 						/>
 						</Form.Group>
 						
 					<hr />
 					
-					<Button variant="primary" type="submit">
-						Update Product
+					<Button variant="info" type="submit">
+						Update Employee
 					</Button>
 					
 					
-				</Form>
+				</Form> 
 				
 
 			
 				
-			)}
+			
 				</div>
 		
 		
-	);
+	)
 };
