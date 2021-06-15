@@ -8,8 +8,8 @@ import { updateLogin } from "../../pages/login/loginSlice";
 import "./loginForm.style.css";
 
 const initialState = {
-	email: "puja@com",
-	password: "1Aa@qwei",
+	email: "sheeraz@memon.com",
+	password: "12345",
 };
 export const LoginForm = () => {
 	const history = useHistory();
@@ -100,6 +100,8 @@ export const LoginForm = () => {
 				<a href="/reset-password" className="text-right">
 					Forgot Password ?
 				</a>
+				<a href="http://localhost:3000/">Employee login</a>
+
 			</Card>
 		</div>
 	);
