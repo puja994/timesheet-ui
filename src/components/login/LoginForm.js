@@ -100,7 +100,7 @@ export const LoginForm = () => {
 				<a href="/reset-password" className="text-right">
 					Forgot Password ?
 				</a>
-				<a href= "http://timesheetawsbucket.s3-website.us-east-2.amazonaws.com">Employee login</a>
+				<a href= "http://timesheetemployeebucket.s3-website.us-east-2.amazonaws.com/">Employee login</a>
 
 			</Card>
 		</div>
