@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const rootUrl = "http://localhost:8000/api/v1/"
+const rootUrl = process.env.NODE_ENV ? process.env.REACT_APP_ROOT_API : "http://localhost:8000/api/v1/"
 const shiftApi = rootUrl + "shifts"
 
 export const saveShift = frmDt =>{

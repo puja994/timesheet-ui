@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const rootUrl = "http://localhost:8000/api/v1/user";
+const rootUrl = process.env.NODE_ENV ? process.env.REACT_APP_ROOT_API : "http://localhost:8000/api/v1/"
 const logOutEndPoint = rootUrl + "/logout";
 const otpReqEP = rootUrl + "/otp";
 const passResetEP = rootUrl + "/password";
